@@ -24,10 +24,10 @@ services:
     networks:
       - backend
       - frontend
-    environment:
-      server.host: cloud.retool.solutions
+    # environment:
+      # server.host: cloud.retool.solutions
   nginx:
-    image: nginx
+    image: zwilson/proxy
     ports:
       - 80:80
     env_file: dev.env

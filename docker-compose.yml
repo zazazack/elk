@@ -15,20 +15,16 @@ services:
       - backend
       - frontend
   proxy:
-    image: nginx
+    image: zwilson/proxy
     restart: always
     build: .
+    networks:
+      - frontend
     ports:
       - 80:80
     volumes:
-      - ./configs/nginx/kibana.conf:/etc/nginx/conf.d/mysite.template
+      - ./configs/nginx/kibana.conf:/etc/nginx/conf.d/default.conf
       - ./logs/nginx:/var/log/nginx
-    environment:
-      USERNAME: admin
-      PASSWORD: password
-      NGINX_HOST: localhost
-    networks:
-      - frontend
-    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && exec nginx-debug -g 'daemon off;'" # WARNING: NOT FOR PROD
+    command: nginx-debug -g 'daemon off;'
 volumes:
   elasticsearch_data:
