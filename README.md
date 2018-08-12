@@ -22,14 +22,8 @@ This file will contain
 
 > Note the `.` in `.env`. This is important as this file should both be added to your `ignore*` files, e.g.,  `gitignore`, and be hidden from plain sight on the host\*\*. (files beggining w/ `.` are "hidden" by default on \*nix systems).
 
-Set the following environment variables as required
+Create an external, attachable network on the host (default is localhost)
 
-    NGINX_HOST="localhost" # default
-    server.name=$NGINX_HOST # default
-
-Create two external, attachable networks on the host (default is localhost)
-
-    $ docker network create --driver=overlay frontend
     $ docker network create --driver=overlay --attachable backend
 
 Deploy the stack
